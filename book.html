@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Viewer</title>
+    <style>
+        body, html {
+            background-color: bisque;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .book-container {
+            position: relative;
+            background-color: white;
+            padding: 20px;
+            border: 2px solid #ccc;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+        }
+        img {
+            max-width: 100%;
+            max-height: 80vh;
+            object-fit: contain;
+            margin-bottom: 20px;
+        }
+        .button-container {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+        }
+        .button {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background: linear-gradient(135deg, #6e45e2, #88d3ce);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .button:hover {
+            background: linear-gradient(135deg, #88d3ce, #6e45e2);
+            transform: scale(1.05);
+        }
+        .button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+        /* ✅ ปุ่ม "ถูก" และ "ผิด" อยู่บนรูป */
+        .overlay-buttons {
+            position: absolute;
+            bottom: 23%; /* เปลี่ยนจาก 23% เป็น 30% */
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="book-container" id="book-container">
+        <img id="book-image" src="1.jpg" alt="Book Page">
+
+        <!-- ✅ ปุ่ม "ถูก" และ "ผิด" ซ้อนบนรูป -->
+        <div class="overlay-buttons" id="overlay-buttons" style="display: none;">
+            <button class="button" onclick="correctAnswer()">20+5</button>
+            <button class="button" onclick="wrongAnswer()">20+1</button>
+        </div>
+
+        <div class="button-container" id="button-container">
+            <button class="button" onclick="prevPage()">ย้อนกลับ</button>
+            <button class="button" id="next-btn" onclick="nextPage()">ถัดไป</button>
+        </div>
+    </div>
+
+    <script>
+        let currentPage = 1;
+        const totalPages = 2;
+
+        function updatePage() {
+            const bookContainer = document.getElementById('book-container');
+            const nextBtn = document.getElementById('next-btn');
+            const overlayButtons = document.getElementById('overlay-buttons');
+
+            bookContainer.style.opacity = '0';
+            bookContainer.style.transform = 'scale(0.9)';
+            setTimeout(() => {
+                document.getElementById('book-image').src = currentPage + '.jpg';
+                bookContainer.style.opacity = '1';
+                bookContainer.style.transform = 'scale(1)';
+
+                // ✅ แสดงปุ่ม "ถูก" และ "ผิด" เมื่อถึงหน้าสุดท้าย
+                if (currentPage === totalPages) {
+                    nextBtn.style.display = 'none';
+                    overlayButtons.style.display = 'flex';
+                } else {
+                    nextBtn.style.display = 'inline-block';
+                    overlayButtons.style.display = 'none';
+                }
+            }, 500);
+        }
+
+        function prevPage() {
+            if (currentPage > 1) {
+                currentPage--;
+                updatePage();
+            } else {
+                goHome();
+            }
+        }
+
+        function nextPage() {
+            if (currentPage < totalPages) {
+                currentPage++;
+                updatePage();
+            } else {
+                goNextHTML();
+            }
+        }
+
+        function goHome() {
+            window.location.href = 'index.html';
+        }
+
+        function goNextHTML() {
+            window.location.href = 'ck.html';
+        }
+
+        function correctAnswer() {
+            window.location.href = 'ck.html'; // เปลี่ยน 'correct.html' เป็นชื่อไฟล์ HTML ที่คุณต้องการลิงก์ไป
+        }
+
+        function wrongAnswer() {
+            window.location.href = '1123.html'; // เปลี่ยน 'wrong.html' เป็นชื่อไฟล์ HTML ที่คุณต้องการลิงก์ไป
+        }
+    </script>
+</body>
+</html>

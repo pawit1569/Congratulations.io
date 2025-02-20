@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ข้อความแจ้งเตือน</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+            background-color: #f8f8f8;
+        }
+
+        h1 {
+            color: #d9534f;
+            margin-bottom: 20px;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .next-btn {
+            background-color: #5cb85c;
+            color: white;
+        }
+
+        .back-btn {
+            background-color: #f0ad4e;
+            color: white;
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+<body>
+
+    <h1>เสียใจด้วย พี่ผิดหวังมาก</h1>
+
+    <div class="button-container">
+      
+        <button class="next-btn" onclick="goToNextPage()">เริ่มใหม่ได้น้อง</button>
+    </div>
+
+    <script>
+        function goToNextPage() {
+            // เปลี่ยน URL เป็นหน้าถัดไปที่ต้องการ
+            window.location.href = "book.html";
+        }
+    </script>
+
+</body>
+</html>
